@@ -37,7 +37,7 @@ export default function CustomPagination({ pathname, urlParam, urlValue }: Custo
           color='primary'
           className='my-6 flex w-full items-center justify-center'
           renderItem={(item) =>
-            item.page !== null ? (
+            item.page !== null && item.page !== 0 && item.page < pagesCount ? (
               <Link href={`${pathname}?${urlParam}=${urlValue}&page=${item.page}`}>
                 <PaginationItem {...item} />
               </Link>

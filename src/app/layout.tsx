@@ -1,11 +1,12 @@
-import type { Metadata } from 'next'
-import '../assets/css/globals.css'
-import { Roboto } from 'next/font/google'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'AV | Movie Search',
-  description: 'Search the movie to Watch now!',
-}
+import Header from '@/components/Header'
+import { store } from '@/redux/store'
+import { ThemeProvider, createTheme } from '@mui/material'
+import { Roboto } from 'next/font/google'
+import { Provider } from 'react-redux'
+
+import '../assets/css/globals.css'
 
 const roboto = Roboto({
   weight: '400',
@@ -13,10 +14,23 @@ const roboto = Roboto({
   display: 'swap',
 })
 
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+})
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='en' className={roboto.className}>
-      <body>{children}</body>
-    </html>
+    <Provider store={store}>
+      <ThemeProvider theme={darkTheme}>
+        <html lang='en' className={roboto.className}>
+          <body className='container mx-auto'>
+            <Header />
+            <main>{children}</main>
+          </body>
+        </html>
+      </ThemeProvider>
+    </Provider>
   )
 }

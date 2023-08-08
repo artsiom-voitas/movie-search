@@ -21,7 +21,7 @@ export default function DiscoveredMovies({ searchQuerry, page }: DiscoveredMovie
 
   useEffect(() => {
     fetchMovies(searchQuerry, page).then((res) => {
-      if (res.Response) {
+      if (res.Response === 'True') {
         dispatch(setMovies(res.Search))
         dispatch(setTotalAmount(res.totalResults))
         dispatch(setCurrentPage(page))

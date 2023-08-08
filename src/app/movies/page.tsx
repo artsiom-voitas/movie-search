@@ -2,10 +2,11 @@
 
 import CustomPagination from '@/components/CustomPagination'
 import DiscoveredMovies from '@/components/DiscoveredMovies'
+import capitalizeFirstLetters from '@/services/capitalizeFirstLetters'
 import { redirect, usePathname, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 
-export default function movies() {
+export default function Movies() {
   const searchParams = useSearchParams()
   const pathname = usePathname()
 
@@ -17,7 +18,8 @@ export default function movies() {
   }
 
   useEffect(() => {
-    document.title = `AV | ${search}`
+    const title = capitalizeFirstLetters(search)
+    document.title = `AV | ${title}`
   }, [search])
 
   return (

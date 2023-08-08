@@ -4,7 +4,7 @@ import axios from 'axios'
 export interface MoviesSearchResponse {
   Search: MoviesSearchResults[]
   totalResults: string
-  Response?: boolean
+  Response?: string
 }
 
 export default async function fetchMovies(searchValue: string, page: string) {

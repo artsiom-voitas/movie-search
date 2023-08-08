@@ -25,9 +25,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <Provider store={store}>
       <ThemeProvider theme={darkTheme}>
         <html lang='en' className={roboto.className}>
-          <body className='container mx-auto'>
+          <body>
             <Header />
-            <main>{children}</main>
+            <main className='container mx-auto pt-24'>{children}</main>
           </body>
         </html>
       </ThemeProvider>

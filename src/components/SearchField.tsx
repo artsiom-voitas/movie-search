@@ -27,6 +27,7 @@ export default function SearchField() {
         id='outlined-controlled'
         label='The Movie'
         variant='outlined'
+        color='secondary'
         value={searchQuerry}
         onChange={onSearchValueChange}
         className='w-[300px]'

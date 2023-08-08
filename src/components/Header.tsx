@@ -1,4 +1,4 @@
-import AdbIcon from '@mui/icons-material/Adb'
+import MovieOutlinedIcon from '@mui/icons-material/MovieOutlined'
 import AppBar from '@mui/material/AppBar'
 import Container from '@mui/material/Container'
 import Toolbar from '@mui/material/Toolbar'
@@ -8,17 +8,15 @@ import SearchField from './SearchField'
 
 export default function Header() {
   return (
-    <header>
-      <AppBar position='static' color='default' enableColorOnDark>
-        <Container maxWidth='xl'>
-          <Toolbar disableGutters className='justify-between p-2'>
-            <Link href='/'>
-              <AdbIcon sx={{ display: 'flex', mr: 2 }} />
-            </Link>
-            <SearchField />
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </header>
+    <AppBar position='fixed' color='primary' enableColorOnDark>
+      <Container maxWidth='xl'>
+        <Toolbar disableGutters className='justify-between p-2'>
+          <Link href='/'>
+            <MovieOutlinedIcon sx={{ display: 'flex', mr: 2, fontSize: '60px' }} />
+          </Link>
+          <SearchField />
+        </Toolbar>
+      </Container>
+    </AppBar>
   )
 }

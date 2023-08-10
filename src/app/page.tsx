@@ -1,5 +1,3 @@
-'use client'
-
 import getThreeRandomTweets from '@/services/getThreeRandomTweets'
 import { Metadata } from 'next'
 import { Tweet } from 'react-tweet'

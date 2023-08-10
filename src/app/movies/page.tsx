@@ -8,6 +8,7 @@ import {
   moviesAreLoading,
   searchMoviesError,
   setCurrentPage,
+  setSearchQuerry,
 } from '@/redux/moviesSlice'
 import { AppDispatch } from '@/redux/store'
 import capitalizeFirstLetters from '@/services/capitalizeFirstLetters'
@@ -15,7 +16,7 @@ import { redirect, usePathname, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-export default function Movies() {
+export default function Page() {
   const dispatch = useDispatch<AppDispatch>()
   const searchParams = useSearchParams()
   const pathname = usePathname()
@@ -29,7 +30,7 @@ export default function Movies() {
   const errorMessage = useSelector(searchMoviesError)
 
   if (search === null || search.length === 0 || page === null || page.length === 0) {
-    redirect('/')
+    redirect('/error')
   }
 
   useEffect(() => {
@@ -40,12 +41,10 @@ export default function Movies() {
     setTimeout(() => {
       dispatch(fetchMovies(searchData))
     }, 1000)
-    dispatch(setCurrentPage(page))
 
     const title = capitalizeFirstLetters(search)
     document.title = `AV | ${title}`
   }, [dispatch, search, page])
-  console.log(movies);
 
   return (
     <>
@@ -58,7 +57,8 @@ export default function Movies() {
           ) : (
             <>
               <div className='flex flex-wrap gap-6 gap-x-20 items-center justify-center p-7 mt-6'>
-                {movies.length > 0 &&
+                {movies &&
+                  movies.length > 0 &&
                   movies.map((movie) => (
                     <MovieShortCard
                       key={movie?.imdbID}

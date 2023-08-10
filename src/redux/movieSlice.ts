@@ -1,10 +1,10 @@
 // import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 // import axios from 'axios'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
 
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import axios from "axios"
-import { MovieInitialState, MovieResponse } from "./sliceTypes"
-import { RootState } from "./store"
+import { MovieInitialState, MovieResponse } from './sliceTypes'
+import { RootState } from './store'
 
 // import { RootState } from './store'
 
@@ -29,32 +29,32 @@ export const fetchMovie = createAsyncThunk(
 
 const initialState: MovieInitialState = {
   isLoading: true,
-  results: {
-    Title: "",
-    Year: "",
-    Rated: "",
-    Released: "",
-    Runtime: "",
-    Genre: "",
-    Director: "",
-    Writer: "",
-    Actors: "",
-    Plot: "",
-    Language: "",
-    Country: "",
-    Awards: "",
-    Poster: "",
+  movieInformation: {
+    Title: '',
+    Year: '',
+    Rated: '',
+    Released: '',
+    Runtime: '',
+    Genre: '',
+    Director: '',
+    Writer: '',
+    Actors: '',
+    Plot: '',
+    Language: '',
+    Country: '',
+    Awards: '',
+    Poster: '',
     Ratings: [],
-    Metascore: "",
-    imdbRating: "",
-    imdbVotes: "",
-    imdbID: "",
-    Type: "",
-    DVD: "",
-    BoxOffice: "",
-    Production: "",
-    Website: "",
-    Response: ""
+    Metascore: '',
+    imdbRating: '',
+    imdbVotes: '',
+    imdbID: '',
+    Type: '',
+    DVD: '',
+    BoxOffice: '',
+    Production: '',
+    Website: '',
+    Response: '',
   },
   errorMessage: null,
 }
@@ -70,7 +70,7 @@ const movieSlice = createSlice({
     builder.addCase(fetchMovie.fulfilled, (state, action) => {
       if (action.payload) {
         state.isLoading = false
-        state.results = action.payload
+        state.movieInformation = action.payload
         state.errorMessage = null
       }
     })
@@ -79,12 +79,11 @@ const movieSlice = createSlice({
       state.errorMessage = 'Failed to fetch movies. Try to reload your page!'
     })
   },
-  reducers: {
-  },
+  reducers: {},
 })
 
 export const movieIsLoading = (state: RootState) => state.movie.isLoading
-export const fetchedMovie = (state: RootState) => state.movie.results
+export const fetchedMovie = (state: RootState) => state.movie.movieInformation
 export const movieError = (state: RootState) => state.movie.errorMessage
 
 export default movieSlice.reducer

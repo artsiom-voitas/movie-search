@@ -55,6 +55,6 @@ export interface MovieResponse {
 
 export interface MovieInitialState {
     isLoading: boolean
-    results: MovieResponse,
+    movieInformation: MovieResponse,
     errorMessage: null | string | undefined,
 }

@@ -12,30 +12,30 @@ export default function MovieShortCard({ Poster, Title, Year, imdbID }: MoviesSe
 
   return (
     <Link
-    href={`
+      href={`
        /movie?imdbid=${imdbID}
      `}
-  >
- <Card className='w-[300px] lg:w-[330px]' sx={{backgroundColor: '#15202b'}}>
-      <CardActionArea>
-        <MotionCardMedia
-          className='h-[430px] lg:h-[470px]'
-          image={Poster}
-          whileHover={{
-            scale: 1.05,
-          }}
-          whileTap={{ scale: 0.9 }}
-        />
-        <CardContent>
-          <Typography gutterBottom variant='h6' component='div'>
-            {Title}
-          </Typography>
-          <Typography variant='body2' color='text.secondary'>
-            {Year}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
-  </Link>
+    >
+      <Card className='w-[300px] lg:w-[330px]' sx={{ backgroundColor: '#15202b' }}>
+        <CardActionArea>
+          <MotionCardMedia
+            className='h-[430px] lg:h-[470px]'
+            image={Poster}
+            whileHover={{
+              scale: 1.05,
+            }}
+            whileTap={{ scale: 0.9 }}
+          />
+          <CardContent>
+            <Typography gutterBottom variant='h6' component='div'>
+              {Title}
+            </Typography>
+            <Typography variant='body2' color='text.secondary'>
+              {Year}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </Link>
   )
 }

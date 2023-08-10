@@ -2,30 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 import { RootState } from './store'
-
-interface MoviesSearchResponse {
-  Search: MoviesSearchResults[]
-  totalResults: string
-  Response: string
-  Error: string
-}
-
-interface MoviesSearchInitialState {
-  searchQuerry: string
-  isLoading: boolean
-  results: MoviesSearchResults[]
-  totalAmount: string
-  currentPage: string
-  errorMessage: string | null | undefined
-}
-
-export interface MoviesSearchResults {
-  Poster: string
-  Title: string
-  Type?: string
-  Year: string
-  imdbID: string
-}
+import { MoviesSearchInitialState, MoviesSearchResponse } from './sliceTypes';
 
 export const fetchMovies = createAsyncThunk(
   'movies/fetchMovies',

@@ -1,6 +1,6 @@
 'use client'
 
-import { Error, Loader, MovieCard } from '@/components'
+import { Error, Loader, MovieShortCard } from '@/components'
 import CustomPagination from '@/components/CustomPagination'
 import {
   fetchMovies,
@@ -45,6 +45,7 @@ export default function Movies() {
     const title = capitalizeFirstLetters(search)
     document.title = `AV | ${title}`
   }, [dispatch, search, page])
+  console.log(movies);
 
   return (
     <>
@@ -59,7 +60,7 @@ export default function Movies() {
               <div className='flex flex-wrap gap-6 gap-x-20 items-center justify-center p-7 mt-6'>
                 {movies.length > 0 &&
                   movies.map((movie) => (
-                    <MovieCard
+                    <MovieShortCard
                       key={movie?.imdbID}
                       Poster={movie.Poster}
                       Title={movie.Title}

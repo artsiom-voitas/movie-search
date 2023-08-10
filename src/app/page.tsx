@@ -1,4 +1,8 @@
+'use client'
+
+import getThreeRandomTweets from '@/services/getThreeRandomTweets'
 import { Metadata } from 'next'
+import { Tweet } from 'react-tweet'
 
 export const metadata: Metadata = {
   title: 'AV | Movie Search',
@@ -6,5 +10,13 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
-  return <div></div>
+  const tweets: string[] = getThreeRandomTweets()
+
+  return (
+    <div className='flex flex-col justify-center items-center px-3'>
+      {tweets.map((tweet, index) => (
+        <Tweet id={tweet} key={index} />
+      ))}
+    </div>
+  )
 }

@@ -1,7 +1,13 @@
-import { setCurrentPage } from '@/redux/movieSlice'
-import { RootState } from '@/redux/store'
+import {
+  currentMoviesPage,
+  moviesAreLoading,
+  setCurrentPage,
+  totalMoviesAmount,
+} from '@/redux/moviesSlice'
+import { AppDispatch } from '@/redux/store'
 import { Pagination, PaginationItem } from '@mui/material'
 import Link from 'next/link'
+import { redirect, useSearchParams } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
 
 interface CustomPaginationProps {
@@ -11,14 +17,20 @@ interface CustomPaginationProps {
 }
 
 export default function CustomPagination({ pathname, urlParam, urlValue }: CustomPaginationProps) {
-  const dispatch = useDispatch()
-  const totalAmount = Number(useSelector((state: RootState) => state.movies.totalAmount))
-  const currentPage = Number(useSelector((state: RootState) => state.movies.currentPage))
-  const isLoading = useSelector((state: RootState) => state.movies.isLoading)
+  const dispatch = useDispatch<AppDispatch>()
+  const totalAmount = Number(useSelector(totalMoviesAmount))
+  const currentPage = Number(useSelector(currentMoviesPage))
+  const isLoading = useSelector(moviesAreLoading)
+  const searchParams = useSearchParams()
+  const page = searchParams.get('page')
 
   let pagesCount: number = Number((totalAmount / 10).toFixed())
   if (pagesCount > 100) {
     return pagesCount === 100
+  }
+
+  if (Number(page) > pagesCount) {
+    redirect('/error')
   }
 
   const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {

@@ -2,18 +2,26 @@ import MovieOutlinedIcon from '@mui/icons-material/MovieOutlined'
 import AppBar from '@mui/material/AppBar'
 import Container from '@mui/material/Container'
 import Toolbar from '@mui/material/Toolbar'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
 
 import SearchField from './SearchField'
 
 export default function Header() {
+  const MotionLink = motion(Link)
   return (
-    <AppBar position='fixed' color='primary' enableColorOnDark>
+    <AppBar position='fixed' color='default' enableColorOnDark>
       <Container maxWidth='xl'>
         <Toolbar disableGutters className='justify-between p-2'>
-          <Link href='/'>
-            <MovieOutlinedIcon sx={{ display: 'flex', mr: 2, fontSize: '60px' }} />
-          </Link>
+          <MotionLink
+            href='/'
+            whileHover={{
+              scale: 1.01,
+            }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <MovieOutlinedIcon sx={{ display: 'flex', mr: 2, fontSize: '60px', color: 'white' }} />
+          </MotionLink>
           <SearchField />
         </Toolbar>
       </Container>

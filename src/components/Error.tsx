@@ -10,6 +10,7 @@ export default function Error({ message }: ErrorProps) {
     <div className='flex justify-center'>
       <Card
         variant='outlined'
+        sx={{backgroundColor: '#15202b'}}
         className='absolute top-[50%] translate-y-[-50%] flex flex-col items-center justify-between gap-10 p-12
         max-w-[375px] w-full text-center'
       >

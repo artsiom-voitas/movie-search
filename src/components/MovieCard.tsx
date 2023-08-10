@@ -10,7 +10,7 @@ export default function MovieCard({ Poster, Title, Year, imdbID }: MoviesSearchR
   const MotionCardMedia = motion(CardMedia)
 
   return (
-    <Card className='w-[300px] lg:w-[330px]'>
+    <Card className='w-[300px] lg:w-[330px]' sx={{backgroundColor: '#15202b'}}>
       <CardActionArea>
         <MotionCardMedia
           className='h-[430px] lg:h-[470px]'

@@ -43,11 +43,7 @@ const loadingCircleTransition = {
 
 export default function Loader() {
   return (
-    // <div className='flex justify-center '>
-    //   <CircularProgress size={150} className='absolute top-[50%] translate-y-[-50%]' />
-    // </div>
     <div className='flex justify-center'>
-      <div className='fixed w-full min-h-screen z-50 bg-black opacity-30' />
       <div className='flex fixed w-full justify-center items-center h-screen'>
         <motion.div
           style={loadingContainer}

@@ -10,7 +10,7 @@ import SearchField from './SearchField'
 export default function Header() {
   const MotionLink = motion(Link)
   return (
-    <AppBar position='fixed' color='default' enableColorOnDark>
+    <AppBar position='fixed' enableColorOnDark sx={{backgroundColor: '#15202b'}}>
       <Container maxWidth='xl'>
         <Toolbar disableGutters className='justify-between p-2'>
           <MotionLink

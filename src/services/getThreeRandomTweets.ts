@@ -31,14 +31,14 @@ const tweets: string[] = [
   '1472941742299176972',
 ]
 
-export default function getFiveRandomTweets(): string[] {
+export default function getThreeRandomTweets(): string[] {
   for (let i = tweets.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
     ;[tweets[i], tweets[j]] = [tweets[j], tweets[i]]
   }
-  let fiveTweets: string[] = []
-  for (let i = 0; i < 5; i++) {
-    fiveTweets.push(tweets[i])
+  let threeTweets: string[] = []
+  for (let i = 0; i < 3; i++) {
+    threeTweets.push(tweets[i])
   }
-  return fiveTweets
+  return threeTweets
 }

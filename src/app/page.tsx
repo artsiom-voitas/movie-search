@@ -1,6 +1,6 @@
 'use client'
 
-import getFiveRandomTweets from '@/services/getFiveRandomTweets'
+import getThreeRandomTweets from '@/services/getThreeRandomTweets'
 import { Metadata } from 'next'
 import { Tweet } from 'react-tweet'
 
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
-  const tweets: string[] = getFiveRandomTweets()
+  const tweets: string[] = getThreeRandomTweets()
 
   return (
     <div className='flex flex-col justify-center items-center px-3'>

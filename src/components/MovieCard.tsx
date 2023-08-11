@@ -1,6 +1,6 @@
 import { MovieResponse } from '@/redux/sliceTypes'
 import { createLongFacts, createShortFacts } from '@/services/createDataToRender'
-import { Card, CardContent, CardMedia, Typography } from '@mui/material'
+import { Card, Typography } from '@mui/material'
 import { motion } from 'framer-motion'
 
 import { Imdb } from './icons'
@@ -24,16 +24,10 @@ export default function MovieCard({ movie }: MovieProps) {
           }}
           whileTap={{ scale: 0.9 }}
         >
-          <CardMedia className='h-auto w-[375px]' image={Poster} component='img' />
+          <img className='h-auto w-[375px]' src={Poster} alt={`${Title} poster`} />
         </motion.div>
-        <div className=''>
-          <Typography
-            variant='h4'
-            component='div'
-            className='text-center md:text-left font-bold mb-6'
-          >
-            {Title}
-          </Typography>
+        <div>
+          <h1 className='text-center text-[34px] md:text-left font-bold mb-6'>{Title}</h1>
           <div className='flex flex-col gap-4 w-full md:w-[300px] p-4 sm:p-10 sm:pt-1 md:p-0 justify-start'>
             {shortFacts.map((fact, index) => (
               <div className='flex text-sm justify-between text-center items-center' key={index}>
@@ -66,18 +60,18 @@ export default function MovieCard({ movie }: MovieProps) {
           </div>
         </div>
       </div>
-      <CardContent className='p-5 sm:pt-0 sm:p-14 md:p-5 md:px-16'>
+      <div className='p-5 sm:pt-0 sm:p-14 md:p-5 md:px-16'>
         {longFacts.map((fact) => (
-          <>
-            <Typography gutterBottom variant='h4' component='div' className='font-bold'>
+          <div className='mb-6'>
+            <Typography gutterBottom variant='h4' component='div' sx={{ fontWeight: '700' }}>
               {fact.name}
             </Typography>
-            <Typography variant='body1' color='text.secondary' className='mb-6'>
+            <Typography variant='body1' color='text.secondary'>
               {fact.value}
             </Typography>
-          </>
+          </div>
         ))}
-      </CardContent>
+      </div>
     </Card>
   )
 }

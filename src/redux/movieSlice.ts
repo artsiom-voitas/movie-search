@@ -1,12 +1,8 @@
-// import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-// import axios from 'axios'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 import { MovieInitialState, MovieResponse } from './sliceTypes'
 import { RootState } from './store'
-
-// import { RootState } from './store'
 
 export const fetchMovie = createAsyncThunk(
   'movies/fetchMovies',

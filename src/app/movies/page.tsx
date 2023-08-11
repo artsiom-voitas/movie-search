@@ -7,8 +7,6 @@ import {
   fetchedMovies,
   moviesAreLoading,
   searchMoviesError,
-  setCurrentPage,
-  setSearchQuerry,
 } from '@/redux/moviesSlice'
 import { AppDispatch } from '@/redux/store'
 import capitalizeFirstLetters from '@/services/capitalizeFirstLetters'

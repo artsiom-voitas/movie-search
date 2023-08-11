@@ -20,8 +20,6 @@ export default function Page() {
     redirect('/error')
   }
 
-  console.log(useSelector(searchMovieQuerry))
-
   useEffect(() => {
     dispatch(fetchMovie(imdbID))
     document.title = `AV | ${movie.Title}`

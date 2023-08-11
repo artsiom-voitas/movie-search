@@ -1,3 +1,4 @@
+import Imdb from './Imdb'
 import LogoIcon from './LogoIcon'
 import SearchIconMod from './SearchIconMod'
 
@@ -5,4 +6,4 @@ export default interface IconProps {
   className?: string
 }
 
-export { LogoIcon, SearchIconMod }
+export { LogoIcon, SearchIconMod, Imdb }

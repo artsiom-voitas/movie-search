@@ -28,5 +28,5 @@ export default function Page() {
     }
   }, [dispatch, imdbID, movie.Title])
 
-  return <>{!isLoading ? <Loader /> : <MovieCard movie={movie} />}</>
+  return <>{isLoading ? <Loader /> : <MovieCard movie={movie} />}</>
 }

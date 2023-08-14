@@ -61,8 +61,8 @@ export default function MovieCard({ movie }: MovieProps) {
         </div>
       </div>
       <div className='p-5 sm:pt-0 sm:p-14 md:p-5 md:px-16'>
-        {longFacts.map((fact) => (
-          <div className='mb-6'>
+        {longFacts.map((fact, index) => (
+          <div className='mb-6' key={index}>
             <Typography gutterBottom variant='h4' component='div' sx={{ fontWeight: '700' }}>
               {fact.name}
             </Typography>

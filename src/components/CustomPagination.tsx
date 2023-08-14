@@ -25,6 +25,9 @@ export default function CustomPagination({ pathname, urlParam, urlValue }: Custo
   const page = searchParams.get('page')
 
   let pagesCount: number = Number((totalAmount / 10).toFixed())
+  if (totalAmount >= 1 && totalAmount <= 10) {
+    return pagesCount === 1
+  }
   if (pagesCount > 100) {
     return pagesCount === 100
   }

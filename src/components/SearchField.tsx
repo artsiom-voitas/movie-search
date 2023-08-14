@@ -3,7 +3,7 @@
 import { searchMovieQuerry } from '@/redux/moviesSlice'
 import { FormControl, TextField } from '@mui/material'
 import { useRouter } from 'next/navigation'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { SearchIconMod } from './icons/'
@@ -12,6 +12,7 @@ export default function SearchField() {
   const storedSearchQuerry = useSelector(searchMovieQuerry)
   const [searchValue, setSearchValue] = useState<string>('')
   const router = useRouter()
+  const searchRef = useRef<HTMLInputElement>(null)
 
   function redirectToSearchResults(): void {
     if (searchValue.length >= 1) {
@@ -19,6 +20,12 @@ export default function SearchField() {
       /movies?search=${searchValue}&page=1
     `)
       setSearchValue('')
+    }
+  }
+
+  function loseInputFocus(): void {
+    if (searchRef.current) {
+      searchRef.current.blur()
     }
   }
   const onSearchValueChange = useCallback((event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -36,8 +43,10 @@ export default function SearchField() {
     (event: React.KeyboardEvent<HTMLDivElement>): void => {
       if (event.key === 'Enter' && storedSearchQuerry !== searchValue) {
         redirectToSearchResults()
+        loseInputFocus()
       } else if (event.key === 'Enter' && storedSearchQuerry === searchValue) {
         setSearchValue('')
+        loseInputFocus()
       }
     },
     [searchValue],
@@ -51,6 +60,7 @@ export default function SearchField() {
         variant='outlined'
         color='primary'
         value={searchValue}
+        inputRef={searchRef}
         onChange={onSearchValueChange}
         onKeyDown={onEnterKeyDown}
         className='w-[300px]'

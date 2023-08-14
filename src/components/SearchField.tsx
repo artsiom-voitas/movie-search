@@ -1,28 +1,47 @@
 'use client'
 
-import { searchMovieQuerry, setSearchQuerry } from '@/redux/moviesSlice'
+import { searchMovieQuerry } from '@/redux/moviesSlice'
 import { FormControl, TextField } from '@mui/material'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import React, { useCallback, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { SearchIconMod } from './icons/'
 
 export default function SearchField() {
   const storedSearchQuerry = useSelector(searchMovieQuerry)
   const [searchValue, setSearchValue] = useState<string>('')
-  const dispatch = useDispatch()
+  const router = useRouter()
 
+  function redirectToSearchResults(): void {
+    if (searchValue.length >= 1) {
+      router.push(`
+      /movies?search=${searchValue}&page=1
+    `)
+      setSearchValue('')
+    }
+  }
   const onSearchValueChange = useCallback((event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchValue(event.target.value)
   }, [])
 
   const onClick = useCallback((): void => {
-    if (storedSearchQuerry !== searchValue) {
-      dispatch(setSearchQuerry(searchValue))
+    redirectToSearchResults()
+    if (storedSearchQuerry === searchValue) {
+      setSearchValue('')
     }
-    setSearchValue('')
   }, [searchValue])
+
+  const onEnterKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>): void => {
+      if (event.key === 'Enter' && storedSearchQuerry !== searchValue) {
+        redirectToSearchResults()
+      } else if (event.key === 'Enter' && storedSearchQuerry === searchValue) {
+        setSearchValue('')
+      }
+    },
+    [searchValue],
+  )
 
   return (
     <FormControl sx={{ flexDirection: 'row' }} className='flex items-center gap-5'>
@@ -33,20 +52,10 @@ export default function SearchField() {
         color='primary'
         value={searchValue}
         onChange={onSearchValueChange}
+        onKeyDown={onEnterKeyDown}
         className='w-[300px]'
       />
-      {searchValue.length >= 1 ? (
-        <Link
-          onClick={onClick}
-          href={`
-             /movies?search=${searchValue}&page=1
-           `}
-        >
-          <SearchIconMod />
-        </Link>
-      ) : (
-        <SearchIconMod />
-      )}
+      <SearchIconMod onClick={onClick} />
     </FormControl>
   )
 }

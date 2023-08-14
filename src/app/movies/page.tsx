@@ -7,6 +7,7 @@ import {
   fetchedMovies,
   moviesAreLoading,
   searchMoviesError,
+  setSearchQuerry,
 } from '@/redux/moviesSlice'
 import { AppDispatch } from '@/redux/store'
 import capitalizeFirstLetters from '@/services/capitalizeFirstLetters'
@@ -36,6 +37,7 @@ export default function Page() {
       searchValue: search,
       page,
     }
+    dispatch(setSearchQuerry(search))
     setTimeout(() => {
       dispatch(fetchMovies(searchData))
     }, 1000)

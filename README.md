@@ -53,7 +53,7 @@ This application is built on the OMDbAPI. With it, you can:
 
 Artsiom Voitas - [@artsiom_voitas](https://x.com/artsiom_voitas) - artsiom.voitas@gmail.com
 
-Project Link: [https://github.com/artsiom-voitas/github-dashboard](https://github.com/artsiom-voitas/movie-search)
+Project Link: [https://github.com/artsiom-voitas/movie-search](https://github.com/artsiom-voitas/movie-search)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

@@ -42,6 +42,7 @@ This application is built on the OMDbAPI. With it, you can:
 ### Built With
 
 - [![React][React.js]][React-url]
+- [![Redux-Toolkit][Redux]][Redux-url]
 - [![Typescript][Typescript]][Typescript-url]
 - [![Next.js][Next.js]][Next.js-url]
 - [![MUI][MUI]][MUI-url]
@@ -71,6 +72,8 @@ Project Link: [https://github.com/artsiom-voitas/github-dashboard](https://githu
 [linkedin-url]: https://www.linkedin.com/in/artsiom-voitas/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
+[Redux]: https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white
+[Redux-url]: redux-toolkit.js.org
 [Typescript]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
 [Typescript-url]: https://www.typescriptlang.org/
 [Next.js]: https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white

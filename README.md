@@ -8,7 +8,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a target="_blank" href="https://github.com/artsiom-voitas/github-dashboard/">
+  <a target="_blank" href="https://github.com/artsiom-voitas/movie-search/">
     <img src="public/logo.png" alt="Logo" height="40">
   </a>
 

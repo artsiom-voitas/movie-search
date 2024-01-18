@@ -1,7 +1,7 @@
 'use client'
 
-import { Error, Loader, MovieShortCard } from '@/components'
-import CustomPagination from '@/components/CustomPagination'
+import { CustomPagination, Error, Header, MovieShortCard } from '@/components'
+import MovieShortCardSkeletton from '@/components/MovieShortCardSkeletton'
 import {
   fetchMovies,
   fetchedMovies,
@@ -32,6 +32,11 @@ export default function Page() {
     redirect('/error')
   }
 
+  let Skeletons = []
+  for (let index = 0; index < 9; index++) {
+    Skeletons.push(<MovieShortCardSkeletton key={index} />)
+  }
+
   useEffect(() => {
     const searchData = {
       searchValue: search,
@@ -48,14 +53,17 @@ export default function Page() {
 
   return (
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <div>
-          {errorMessage ? (
-            <Error message={errorMessage} />
-          ) : (
-            <>
+      <Header />
+      <main className='mt-20'>
+        {isLoading ? (
+          <div className='flex flex-wrap gap-6 gap-x-20 items-center justify-center p-7'>
+            {Skeletons}
+          </div>
+        ) : (
+          <div>
+            {errorMessage ? (
+              <Error message={errorMessage} />
+            ) : (
               <div className='flex flex-wrap gap-6 gap-x-20 items-center justify-center p-7 mt-6'>
                 {movies &&
                   movies.length > 0 &&
@@ -68,12 +76,12 @@ export default function Page() {
                       imdbID={movie.imdbID}
                     />
                   ))}
+                <CustomPagination pathname={pathname} urlParam='search' urlValue={search} />
               </div>
-              <CustomPagination pathname={pathname} urlParam='search' urlValue={search} />
-            </>
-          )}
-        </div>
-      )}
+            )}
+          </div>
+        )}
+      </main>
     </>
   )
 }

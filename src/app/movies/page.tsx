@@ -1,7 +1,7 @@
 'use client'
 
-import { CustomPagination, Error, Header, MovieShortCard } from '@/components'
-import MovieShortCardSkeletton from '@/components/MovieShortCardSkeletton'
+import { CustomPagination, Error, Header, MovieCard } from '@/components'
+import MovieCardSkeletton from '@/components/MovieCardSkeletton'
 import {
   fetchMovies,
   fetchedMovies,
@@ -33,8 +33,8 @@ export default function Page() {
   }
 
   let Skeletons = []
-  for (let index = 0; index < 9; index++) {
-    Skeletons.push(<MovieShortCardSkeletton key={index} />)
+  for (let index = 0; index < 11; index++) {
+    Skeletons.push(<MovieCardSkeletton key={index} />)
   }
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function Page() {
   return (
     <>
       <Header />
-      <main className='mt-20'>
+      <main>
         {isLoading ? (
           <div className='flex flex-wrap gap-6 gap-x-20 items-center justify-center p-7'>
             {Skeletons}
@@ -68,7 +68,7 @@ export default function Page() {
                 {movies &&
                   movies.length > 0 &&
                   movies.map((movie) => (
-                    <MovieShortCard
+                    <MovieCard
                       key={movie?.imdbID}
                       Poster={movie.Poster}
                       Title={movie.Title}

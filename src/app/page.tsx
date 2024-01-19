@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className='container mx-auto pt-24'>
+      <main className='container mx-auto'>
         <div className='flex flex-col justify-center items-center px-3'>
           {tweets.map((tweet, index) => (
             <Tweet id={tweet} key={index} />

@@ -1,8 +1,9 @@
 'use client'
 
-import { Loader, MovieCard } from '@/components'
+import { Header, MovieInformation } from '@/components'
+import MovieInformationSkeletton from '@/components/MovieInformationSkeletton'
 import { fetchMovie, fetchedMovie, movieIsLoading } from '@/redux/movieSlice'
-import { currentMoviesPage, searchMovieQuerry, setCurrentPage } from '@/redux/moviesSlice'
+import { currentMoviesPage, setCurrentPage } from '@/redux/moviesSlice'
 import { AppDispatch } from '@/redux/store'
 import { redirect, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
@@ -28,5 +29,12 @@ export default function Page() {
     }
   }, [dispatch, imdbID, movie.Title])
 
-  return <>{isLoading ? <Loader /> : <MovieCard movie={movie} />}</>
+  return (
+    <>
+      <Header />
+      <main className='flex flex-wrap gap-6 gap-x-20 items-center justify-center p-7 mt-6'>
+        {isLoading ? <MovieInformationSkeletton /> : <MovieInformation movie={movie} />}
+      </main>
+    </>
+  )
 }

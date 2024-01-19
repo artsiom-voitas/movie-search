@@ -1,77 +1,38 @@
-import { MovieResponse } from '@/redux/sliceTypes'
-import { createLongFacts, createShortFacts } from '@/services/createDataToRender'
-import { Card, Typography } from '@mui/material'
+import { MoviesSearchResults } from '@/redux/sliceTypes'
+import { Card, CardFooter, Image } from '@nextui-org/react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
-import { Imdb } from './icons'
-
-interface MovieProps {
-  movie: MovieResponse
-}
-
-export default function MovieCard({ movie }: MovieProps) {
-  let { Title, Poster, Ratings, imdbID } = movie
+export default function MovieCard({ Poster, Title, Year, imdbID }: MoviesSearchResults) {
   Poster = Poster === 'N/A' ? '/placeholder.png' : Poster
-  const shortFacts = createShortFacts(movie)
-  const longFacts = createLongFacts(movie)
+  if (Title.length > 45) {
+    Title = `${Title.substring(0, 45)}...`
+  }
+
+  const AnimatedLink = motion(Link)
 
   return (
-    <Card className='xl:w-[80%] w-full mx-auto' sx={{ backgroundColor: '#15202b' }}>
-      <div className='flex-col md:flex-row items-center flex p-5 lg:gap-20 gap-10 lg:p-14 lg:pb-5'>
-        <motion.div
-          whileHover={{
-            scale: 1.05,
-          }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <img className='h-auto w-[375px]' src={Poster} alt={`${Title} poster`} />
-        </motion.div>
-        <div>
-          <h1 className='text-center text-[34px] md:text-left font-bold mb-6'>{Title}</h1>
-          <div className='flex flex-col gap-4 w-full md:w-[300px] p-4 sm:p-10 sm:pt-1 md:p-0 justify-start'>
-            {shortFacts.map((fact, index) => (
-              <div className='flex text-sm justify-between text-center items-center' key={index}>
-                <h3 className='text-white/70'>{fact.name}</h3>
-                <h3 className='w-1/2 text-left'>{fact.value}</h3>
-              </div>
-            ))}
-            {Ratings?.map((Rating, index) => (
-              <div className='flex text-sm justify-between text-center items-center' key={index}>
-                <h3 className='text-white/70'>
-                  {Rating.Source === 'Internet Movie Database' ? 'IMDb Rating' : Rating.Source}
-                </h3>
-                <h3 className='w-1/2 text-left'>{Rating.Value}</h3>
-              </div>
-            ))}
-            <div className='flex text-sm justify-start items-center'>
-              <h3 className='text-white/70 w-1/2'>More details</h3>
-              <motion.a
-                href={`https://www.imdb.com/title/${imdbID}`}
-                target='_blank'
-                className='w-[25px]'
-                whileHover={{
-                  scale: 1.2,
-                }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <Imdb />
-              </motion.a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className='p-5 sm:pt-0 sm:p-14 md:p-5 md:px-16'>
-        {longFacts.map((fact, index) => (
-          <div className='mb-6' key={index}>
-            <Typography gutterBottom variant='h4' component='div' sx={{ fontWeight: '700' }}>
-              {fact.name}
-            </Typography>
-            <Typography variant='body1' color='text.secondary'>
-              {fact.value}
-            </Typography>
-          </div>
-        ))}
-      </div>
-    </Card>
+    <AnimatedLink
+      whileHover={{
+        scale: 1.05,
+      }}
+      whileTap={{ scale: 0.9 }}
+      href={`
+       /movie?imdbid=${imdbID}
+     `}
+    >
+      <Card isFooterBlurred radius='lg' className='border-none w-[280px] lg:w-[300px]'>
+        <Image
+          alt='Woman listing to music'
+          className='object-cover h-[430px] lg:h-[470px]'
+          src={Poster}
+          width={300}
+        />
+        <CardFooter className='justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10 flex flex-col'>
+          <p className='text-sm text-white'>{Title}</p>
+          <p className='text-sm text-white'>{Year}</p>
+        </CardFooter>
+      </Card>
+    </AnimatedLink>
   )
 }

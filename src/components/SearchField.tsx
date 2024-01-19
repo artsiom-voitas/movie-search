@@ -2,7 +2,7 @@
 
 import { searchMovieQuerry } from '@/redux/moviesSlice'
 import { Input } from '@nextui-org/react'
-import { Search } from 'lucide-react'
+import { SearchIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React, { useCallback, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -53,21 +53,27 @@ export default function SearchField() {
 
   return (
     <Input
-      color='default'
-      label='The Movie'
-      className='max-w-[300px]'
+      classNames={{
+        base: 'max-w-full sm:max-w-[400px] h-10',
+        mainWrapper: 'h-full',
+        input: 'text-small',
+        inputWrapper:
+          'h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20',
+      }}
+      placeholder='Type to search...'
+      size='sm'
+      endContent={
+        <SearchIcon
+          size={18}
+          onClick={onClick}
+          className='hover:bg-default-200/70 rounded-xl bg-default-200/10 cursor-pointer'
+        />
+      }
+      type='search'
       value={searchValue}
       ref={searchRef}
       onKeyDown={onEnterKeyDown}
       onChange={onSearchValueChange}
-      variant='bordered'
-      endContent={
-        <Search
-          size='30'
-          className='hover:bg-default-200/70 rounded-xl bg-default-200/10 cursor-pointer'
-          onClick={onClick}
-        />
-      }
     />
   )
 }

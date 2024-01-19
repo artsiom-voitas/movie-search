@@ -12,7 +12,7 @@ import {
 import { AppDispatch } from '@/redux/store'
 import capitalizeFirstLetters from '@/services/capitalizeFirstLetters'
 import { redirect, usePathname, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 export default function Page() {
@@ -52,7 +52,7 @@ export default function Page() {
   }, [dispatch, search, page])
 
   return (
-    <>
+    <Suspense>
       <Header />
       <main>
         {isLoading ? (
@@ -82,6 +82,6 @@ export default function Page() {
           </div>
         )}
       </main>
-    </>
+    </Suspense>
   )
 }

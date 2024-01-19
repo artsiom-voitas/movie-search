@@ -6,7 +6,7 @@ import { fetchMovie, fetchedMovie, movieIsLoading } from '@/redux/movieSlice'
 import { currentMoviesPage, setCurrentPage } from '@/redux/moviesSlice'
 import { AppDispatch } from '@/redux/store'
 import { redirect, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 export default function Page() {
@@ -30,11 +30,11 @@ export default function Page() {
   }, [dispatch, imdbID, movie.Title])
 
   return (
-    <>
+    <Suspense>
       <Header />
       <main className='flex flex-wrap gap-6 gap-x-20 items-center justify-center p-7 mt-6'>
         {isLoading ? <MovieInformationSkeletton /> : <MovieInformation movie={movie} />}
       </main>
-    </>
+    </Suspense>
   )
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import {
   currentMoviesPage,
   moviesAreLoading,
@@ -5,9 +7,8 @@ import {
   totalMoviesAmount,
 } from '@/redux/moviesSlice'
 import { AppDispatch } from '@/redux/store'
-import { Pagination, PaginationItem } from '@mui/material'
-import Link from 'next/link'
-import { redirect, useSearchParams } from 'next/navigation'
+import { Pagination } from '@nextui-org/react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
 
 interface CustomPaginationProps {
@@ -18,6 +19,7 @@ interface CustomPaginationProps {
 
 export default function CustomPagination({ pathname, urlParam, urlValue }: CustomPaginationProps) {
   const dispatch = useDispatch<AppDispatch>()
+  const router = useRouter()
   const totalAmount = Number(useSelector(totalMoviesAmount))
   const currentPage = Number(useSelector(currentMoviesPage))
   const isLoading = useSelector(moviesAreLoading)
@@ -33,11 +35,13 @@ export default function CustomPagination({ pathname, urlParam, urlValue }: Custo
   }
 
   if (Number(page) > pagesCount) {
-    redirect('/error')
+    router.push('/error')
   }
 
-  const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
+  const handleChange = (value: number) => {
     dispatch(setCurrentPage(String(value)))
+    const newUrl: string = `${pathname}?${urlParam}=${urlValue}&page=${value}`
+    router.push(newUrl)
   }
 
   return (
@@ -46,20 +50,11 @@ export default function CustomPagination({ pathname, urlParam, urlValue }: Custo
         <></>
       ) : (
         <Pagination
-          count={pagesCount}
-          page={Number(currentPage)}
+          total={pagesCount}
+          page={currentPage}
+          showControls
           onChange={handleChange}
-          color='primary'
-          className='my-6 flex w-full items-center justify-center'
-          renderItem={(item) =>
-            item.page !== null && item.page !== 0 && item.page <= pagesCount ? (
-              <Link href={`${pathname}?${urlParam}=${urlValue}&page=${item.page}`}>
-                <PaginationItem {...item} />
-              </Link>
-            ) : (
-              <PaginationItem {...item} />
-            )
-          }
+          className='flex w-full items-center justify-center'
         />
       )}
     </>

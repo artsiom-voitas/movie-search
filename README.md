@@ -45,7 +45,6 @@ This application is built on the OMDbAPI. With it, you can:
 - [![Redux-Toolkit][Redux]][Redux-url]
 - [![Typescript][Typescript]][Typescript-url]
 - [![Next.js][Next.js]][Next.js-url]
-- [![MUI][MUI]][MUI-url]
 
 <!-- CONTACT -->
 
@@ -78,5 +77,3 @@ Project Link: [https://github.com/artsiom-voitas/movie-search](https://github.co
 [Typescript-url]: https://www.typescriptlang.org/
 [Next.js]: https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white
 [Next.js-url]: https://nextjs.org/
-[MUI]: https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white
-[MUI-url]: https://mui.com

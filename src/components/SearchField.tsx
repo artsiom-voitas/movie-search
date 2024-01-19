@@ -1,12 +1,11 @@
 'use client'
 
 import { searchMovieQuerry } from '@/redux/moviesSlice'
-import { FormControl, TextField } from '@mui/material'
+import { Input } from '@nextui-org/react'
+import { SearchIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React, { useCallback, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-
-import { SearchIconMod } from './icons/'
 
 export default function SearchField() {
   const storedSearchQuerry = useSelector(searchMovieQuerry)
@@ -53,19 +52,28 @@ export default function SearchField() {
   )
 
   return (
-    <FormControl sx={{ flexDirection: 'row' }} className='flex items-center gap-5'>
-      <TextField
-        id='outlined-controlled'
-        label='The Movie'
-        variant='outlined'
-        color='primary'
-        value={searchValue}
-        inputRef={searchRef}
-        onChange={onSearchValueChange}
-        onKeyDown={onEnterKeyDown}
-        className='w-[300px]'
-      />
-      <SearchIconMod onClick={onClick} />
-    </FormControl>
+    <Input
+      classNames={{
+        base: 'max-w-full sm:max-w-[400px] h-10',
+        mainWrapper: 'h-full',
+        input: 'text-small',
+        inputWrapper:
+          'h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20',
+      }}
+      placeholder='Type to search...'
+      size='sm'
+      endContent={
+        <SearchIcon
+          size={18}
+          onClick={onClick}
+          className='hover:bg-default-200/70 rounded-xl bg-default-200/10 cursor-pointer'
+        />
+      }
+      type='search'
+      value={searchValue}
+      ref={searchRef}
+      onKeyDown={onEnterKeyDown}
+      onChange={onSearchValueChange}
+    />
   )
 }

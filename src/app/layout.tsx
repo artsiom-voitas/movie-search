@@ -1,36 +1,20 @@
-'use client'
+import { GeistSans } from 'geist/font/sans'
+import type { Metadata } from 'next'
 
-import Header from '@/components/Header'
-import { store } from '@/redux/store'
-import { ThemeProvider, createTheme } from '@mui/material'
-import { Roboto } from 'next/font/google'
-import { Provider } from 'react-redux'
+import './global.css'
+import { Providers } from './providers'
 
-import '../assets/css/globals.css'
-
-const roboto = Roboto({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
-})
-
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-})
+export const metadata: Metadata = {
+  title: 'AV | Movie Search',
+  description: 'Search the movie to Watch now!',
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={darkTheme}>
-        <html lang='en' className={roboto.className}>
-          <body>
-            <Header />
-            <main className='container mx-auto pt-24'>{children}</main>
-          </body>
-        </html>
-      </ThemeProvider>
-    </Provider>
+    <html lang='en' suppressHydrationWarning>
+      <body className={`${GeistSans.className}`}>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
   )
 }

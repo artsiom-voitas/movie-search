@@ -5,7 +5,34 @@ interface DataToRender {
   value: string
 }
 
-export function createShortFacts(movie: MovieResponse): DataToRender[] {
+const loadingMovieResponse: MovieResponse = {
+  Title: '',
+  Year: '',
+  Rated: '',
+  Released: '',
+  Runtime: '',
+  Genre: '',
+  Director: '',
+  Writer: '',
+  Actors: '',
+  Plot: '',
+  Language: '',
+  Country: '',
+  Awards: '',
+  Poster: '',
+  Metascore: '',
+  imdbRating: '',
+  imdbVotes: '',
+  imdbID: '',
+  Type: '',
+  DVD: '',
+  BoxOffice: '',
+  Production: '',
+  Website: '',
+  Response: '',
+}
+
+export function createShortFacts(movie: MovieResponse = loadingMovieResponse): DataToRender[] {
   return [
     {
       name: 'Released',
@@ -58,7 +85,7 @@ export function createShortFacts(movie: MovieResponse): DataToRender[] {
   ]
 }
 
-export function createLongFacts(movie: MovieResponse): DataToRender[] {
+export function createLongFacts(movie: MovieResponse = loadingMovieResponse): DataToRender[] {
   return [
     { name: 'About', value: movie.Plot },
     { name: 'Awards', value: movie.Awards },

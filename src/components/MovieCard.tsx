@@ -3,7 +3,7 @@ import { Card, CardFooter, Image } from '@nextui-org/react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
-export default function MovieCard({ Poster, Title, Year, imdbID }: MoviesSearchResults) {
+export default async function MovieCard({ Poster, Title, Year, imdbID }: MoviesSearchResults) {
   Poster = Poster === 'N/A' ? '/placeholder.png' : Poster
   if (Title.length > 45) {
     Title = `${Title.substring(0, 45)}...`

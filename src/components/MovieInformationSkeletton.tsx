@@ -11,10 +11,7 @@ export default function MovieInformationSkeletton() {
           <Image className='h-auto w-[375px]' src='/placeholder.png' />
         </Skeleton>
         <div className='w-full md:w-auto'>
-          <Skeleton
-            className='text-center text-[34px] md:text-left font-bold mb-6 h-[51px]'
-            rounded-xl
-          />
+          <Skeleton className='text-center text-[34px] md:text-left font-bold mb-6 h-[51px] rounded-xl' />
           <div className='flex flex-col gap-4 w-full md:w-[330px] p-4 sm:p-10 sm:pt-1 md:p-0 pb-0 sm:pb-0 justify-start'>
             {shortFacts.map((fact, index) => (
               <div className='flex text-sm justify-between text-center items-center' key={index}>

@@ -13,18 +13,14 @@ import { useDispatch, useSelector } from 'react-redux'
 
 interface CustomPaginationProps {
   pathname: string
-  urlParam: string
   urlValue: string
 }
 
-export default function CustomPagination({ pathname, urlParam, urlValue }: CustomPaginationProps) {
+export default function CustomPagination({ pathname, urlValue }: CustomPaginationProps) {
   const dispatch = useDispatch<AppDispatch>()
   const router = useRouter()
   const totalAmount = Number(useSelector(totalMoviesAmount))
   const currentPage = Number(useSelector(currentMoviesPage))
-  const isLoading = useSelector(moviesAreLoading)
-  const searchParams = useSearchParams()
-  const page = searchParams.get('page')
 
   let pagesCount: number = Number((totalAmount / 10).toFixed())
   if (totalAmount >= 1 && totalAmount <= 10) {
@@ -34,19 +30,15 @@ export default function CustomPagination({ pathname, urlParam, urlValue }: Custo
     return pagesCount === 100
   }
 
-  if (Number(page) > pagesCount) {
-    router.push('/error')
-  }
-
   const handleChange = (value: number) => {
     dispatch(setCurrentPage(String(value)))
-    const newUrl: string = `${pathname}?${urlParam}=${urlValue}&page=${value}`
+    const newUrl: string = `${pathname}?search=${urlValue}&page=${value}`
     router.push(newUrl)
   }
 
   return (
     <>
-      {totalAmount <= 10 || isLoading ? (
+      {totalAmount <= 10 ? (
         <></>
       ) : (
         <Pagination

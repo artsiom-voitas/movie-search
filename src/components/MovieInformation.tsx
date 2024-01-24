@@ -9,7 +9,7 @@ interface MovieProps {
   movie: MovieResponse
 }
 
-export default function MovieInformation({ movie }: MovieProps) {
+export default async function MovieInformation({ movie }: MovieProps) {
   let { Title, Poster, Ratings, imdbID } = movie
   Poster = Poster === 'N/A' ? '/placeholder.png' : Poster
   const shortFacts = createShortFacts(movie)

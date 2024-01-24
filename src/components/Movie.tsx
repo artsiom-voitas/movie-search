@@ -21,7 +21,9 @@ export default function Movie() {
 
   useEffect(() => {
     dispatch(fetchMovie(imdbID))
-    document.title = `AV | ${movie.Title}`
+    if (movie.Title) {
+      document.title = `AV | ${movie.Title}`
+    }
     return () => {
       dispatch(setCurrentPage(previousPage))
     }

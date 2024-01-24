@@ -2,6 +2,7 @@ import { MovieResponse } from '@/redux/sliceTypes'
 import { createLongFacts, createShortFacts } from '@/services/createDataToRender'
 import { Card, CardBody, CardFooter, Image } from '@nextui-org/react'
 import { motion } from 'framer-motion'
+import { Metadata } from 'next'
 
 import { Imdb } from './icons'
 

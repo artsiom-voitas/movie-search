@@ -1,7 +1,7 @@
 'use client'
 
 import { CustomPagination, MovieCard } from '@/components'
-import { fetchMovies, fetchedMovies, setSearchQuerry } from '@/redux/moviesSlice'
+import { fetchMovies, fetchedMovies, moviesAreLoading, setSearchQuerry } from '@/redux/moviesSlice'
 import { AppDispatch } from '@/redux/store'
 import capitalizeFirstLetters from '@/services/capitalizeFirstLetters'
 import { redirect, usePathname, useSearchParams } from 'next/navigation'
@@ -14,11 +14,10 @@ export default function Movies() {
   const pathname = usePathname()
 
   const search = searchParams.get('search')
-  console.log(search)
-
   const page = searchParams.get('page')
 
   const movies = useSelector(fetchedMovies)
+  const isLoading = useSelector(moviesAreLoading)
 
   if (search === null || search.length === 0 || page === null || page.length === 0) {
     redirect('/error')
@@ -51,7 +50,7 @@ export default function Movies() {
             imdbID={movie.imdbID}
           />
         ))}
-      <CustomPagination pathname={pathname} urlValue={search} />
+      {!isLoading && <CustomPagination pathname={pathname} urlValue={search} />}
     </>
   )
 }

@@ -13,10 +13,10 @@ import { useDispatch, useSelector } from 'react-redux'
 
 interface CustomPaginationProps {
   pathname: string
-  urlValue: string
+  query: string
 }
 
-export default function CustomPagination({ pathname, urlValue }: CustomPaginationProps) {
+export default function CustomPagination({ pathname, query }: CustomPaginationProps) {
   const dispatch = useDispatch<AppDispatch>()
   const router = useRouter()
   const totalAmount = Number(useSelector(totalMoviesAmount))
@@ -32,7 +32,7 @@ export default function CustomPagination({ pathname, urlValue }: CustomPaginatio
 
   const handleChange = (value: number) => {
     dispatch(setCurrentPage(String(value)))
-    const newUrl: string = `${pathname}?search=${urlValue}&page=${value}`
+    const newUrl: string = `/${pathname}/${query}/${value}`
     router.push(newUrl)
   }
 

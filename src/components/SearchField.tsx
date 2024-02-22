@@ -16,7 +16,7 @@ export default function SearchField() {
   function redirectToSearchResults(): void {
     if (searchValue.length >= 1) {
       router.push(`
-      /movies?search=${searchValue}&page=1
+      /movies/${searchValue}/1
     `)
       setSearchValue('')
     }

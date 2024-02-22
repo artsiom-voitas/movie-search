@@ -1,41 +1,47 @@
 'use client'
 
 import { CustomPagination, MovieCard } from '@/components'
-import { fetchMovies, fetchedMovies, moviesAreLoading, setSearchQuery } from '@/redux/moviesSlice'
+import {
+  fetchMovies,
+  fetchedMovies,
+  moviesAreLoading,
+  setCurrentPage,
+  setSearchQuery,
+} from '@/redux/moviesSlice'
 import { AppDispatch } from '@/redux/store'
 import capitalizeFirstLetters from '@/services/capitalizeFirstLetters'
-import { redirect, usePathname, useSearchParams } from 'next/navigation'
+import { redirect, usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-export default function Movies() {
+interface MoviesProps {
+  searchQuery: string
+  page: string
+}
+
+export default function Movies({ searchQuery, page }: MoviesProps) {
   const dispatch = useDispatch<AppDispatch>()
-  const searchParams = useSearchParams()
-  const pathname = usePathname()
-
-  const search = searchParams.get('search')
-  const page = searchParams.get('page')
-
   const movies = useSelector(fetchedMovies)
   const isLoading = useSelector(moviesAreLoading)
 
-  if (search === null || search.length === 0 || page === null || page.length === 0) {
+  if (searchQuery === null || searchQuery.length === 0 || page === null || page.length === 0) {
     redirect('/error')
   }
 
   useEffect(() => {
     const searchData = {
-      searchValue: search,
+      searchValue: searchQuery,
       page,
     }
-    dispatch(setSearchQuery(search))
+    dispatch(setSearchQuery(searchQuery))
+    dispatch(setCurrentPage(page))
     setTimeout(() => {
       dispatch(fetchMovies(searchData))
     }, 1000)
 
-    const title = capitalizeFirstLetters(search)
+    const title = capitalizeFirstLetters(searchQuery)
     document.title = `AV | ${title}`
-  }, [dispatch, search, page])
+  }, [dispatch, searchQuery, page])
 
   return (
     <>
@@ -51,7 +57,7 @@ export default function Movies() {
             imdbID={movie.imdbID}
           />
         ))}
-      {!isLoading && <CustomPagination pathname={pathname} urlValue={search} />}
+      {!isLoading && <CustomPagination pathname='movies' query={searchQuery} />}
     </>
   )
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { searchMovieQuerry } from '@/redux/moviesSlice'
+import { searchMovieQuery } from '@/redux/moviesSlice'
 import { Input } from '@nextui-org/react'
 import { SearchIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -8,7 +8,7 @@ import React, { useCallback, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 export default function SearchField() {
-  const storedSearchQuerry = useSelector(searchMovieQuerry)
+  const storedSearchQuery = useSelector(searchMovieQuery)
   const [searchValue, setSearchValue] = useState<string>('')
   const router = useRouter()
   const searchRef = useRef<HTMLInputElement>(null)
@@ -33,17 +33,17 @@ export default function SearchField() {
 
   const onClick = useCallback((): void => {
     redirectToSearchResults()
-    if (storedSearchQuerry === searchValue) {
+    if (storedSearchQuery === searchValue) {
       setSearchValue('')
     }
   }, [searchValue])
 
   const onEnterKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>): void => {
-      if (event.key === 'Enter' && storedSearchQuerry !== searchValue) {
+      if (event.key === 'Enter' && storedSearchQuery !== searchValue) {
         redirectToSearchResults()
         loseInputFocus()
-      } else if (event.key === 'Enter' && storedSearchQuerry === searchValue) {
+      } else if (event.key === 'Enter' && storedSearchQuery === searchValue) {
         setSearchValue('')
         loseInputFocus()
       }

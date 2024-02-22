@@ -1,7 +1,7 @@
 'use client'
 
 import { CustomPagination, MovieCard } from '@/components'
-import { fetchMovies, fetchedMovies, moviesAreLoading, setSearchQuerry } from '@/redux/moviesSlice'
+import { fetchMovies, fetchedMovies, moviesAreLoading, setSearchQuery } from '@/redux/moviesSlice'
 import { AppDispatch } from '@/redux/store'
 import capitalizeFirstLetters from '@/services/capitalizeFirstLetters'
 import { redirect, usePathname, useSearchParams } from 'next/navigation'
@@ -28,7 +28,7 @@ export default function Movies() {
       searchValue: search,
       page,
     }
-    dispatch(setSearchQuerry(search))
+    dispatch(setSearchQuery(search))
     setTimeout(() => {
       dispatch(fetchMovies(searchData))
     }, 1000)
@@ -43,6 +43,7 @@ export default function Movies() {
         movies.length > 0 &&
         movies.map((movie) => (
           <MovieCard
+            isLoading={isLoading}
             key={movie?.imdbID}
             Poster={movie.Poster}
             Title={movie.Title}

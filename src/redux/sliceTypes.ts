@@ -6,7 +6,7 @@ export interface MoviesSearchResponse {
 }
 
 export interface MoviesSearchInitialState {
-  searchQuerry: string
+  searchQuery: string
   isLoading: boolean
   results: MoviesSearchResults[]
   totalAmount: string
@@ -20,6 +20,7 @@ export interface MoviesSearchResults {
   Type?: string
   Year: string
   imdbID: string
+  isLoading?: boolean
 }
 
 export interface MovieResponse {
@@ -51,6 +52,7 @@ export interface MovieResponse {
   Production: string
   Website: string
   Response?: string
+  Error?: string
 }
 
 export interface MovieInitialState {

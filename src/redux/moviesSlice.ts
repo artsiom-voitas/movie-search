@@ -1,13 +1,13 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
+import { MoviesSearchInitialState, MoviesSearchResponse } from './sliceTypes'
 import { RootState } from './store'
-import { MoviesSearchInitialState, MoviesSearchResponse } from './sliceTypes';
 
 export const fetchMovies = createAsyncThunk(
   'movies/fetchMovies',
-  async (searchQuerry: { searchValue: string; page: string }, thunkAPI) => {
-    const { searchValue, page } = searchQuerry
+  async (SearchQuery: { searchValue: string; page: string }, thunkAPI) => {
+    const { searchValue, page } = SearchQuery
     try {
       const { data } = await axios.get<MoviesSearchResponse>(
         `https://www.omdbapi.com/?s=${searchValue}&page=${page}&apikey=50d54205`,
@@ -25,7 +25,7 @@ export const fetchMovies = createAsyncThunk(
 )
 
 const initialState: MoviesSearchInitialState = {
-  searchQuerry: '',
+  searchQuery: '',
   isLoading: true,
   results: [],
   totalAmount: '',
@@ -55,8 +55,8 @@ const moviesSlice = createSlice({
     })
   },
   reducers: {
-    setSearchQuerry: (state, action: PayloadAction<string>) => {
-      return { ...state, isLoading: true, errorMessage: null, searchQuerry: action.payload }
+    setSearchQuery: (state, action: PayloadAction<string>) => {
+      return { ...state, isLoading: true, errorMessage: null, searchQuery: action.payload }
     },
     setCurrentPage: (state, action: PayloadAction<string>) => {
       return { ...state, isLoading: true, currentPage: action.payload }
@@ -68,8 +68,8 @@ export const moviesAreLoading = (state: RootState) => state.movies.isLoading
 export const fetchedMovies = (state: RootState) => state.movies.results
 export const currentMoviesPage = (state: RootState) => state.movies.currentPage
 export const searchMoviesError = (state: RootState) => state.movies.errorMessage
-export const searchMovieQuerry = (state: RootState) => state.movies.searchQuerry
+export const searchMovieQuery = (state: RootState) => state.movies.searchQuery
 export const totalMoviesAmount = (state: RootState) => state.movies.totalAmount
 
-export const { setCurrentPage, setSearchQuerry } = moviesSlice.actions
+export const { setCurrentPage, setSearchQuery } = moviesSlice.actions
 export default moviesSlice.reducer

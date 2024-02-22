@@ -71,7 +71,7 @@ export default function MovieInformation({ movie, isLoading }: MovieProps) {
             <Image className='h-auto w-[375px]' src={Poster} alt={`${Title} poster`} />
           </motion.div>
           <div className='w-full'>
-            <h1 className='text-center text-[34px] max-w-full md:max-w-[400px] md:text-end font-bold mb-6'>
+            <h1 className='text-center text-[34px] max-w-full md:max-w-[400px] font-bold mb-6'>
               {Title}
             </h1>
             <div className='flex flex-col gap-4 w-full p-4 sm:p-10 sm:pt-1 md:p-0 pb-0 sm:pb-0 justify-start'>

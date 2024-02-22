@@ -65,30 +65,31 @@ export default function MovieInformation({ movie, isLoading }: MovieProps) {
             whileHover={{
               scale: 1.03,
             }}
+            className='w-full flex justify-center'
             whileTap={{ scale: 0.9 }}
           >
             <Image className='h-auto w-[375px]' src={Poster} alt={`${Title} poster`} />
           </motion.div>
-          <div>
-            <h1 className='text-center text-[34px] max-w-[330px] md:text-left font-bold mb-6'>
+          <div className='w-full'>
+            <h1 className='text-center text-[34px] max-w-full md:max-w-[400px] md:text-end font-bold mb-6'>
               {Title}
             </h1>
-            <div className='flex flex-col gap-4 w-full md:w-[330px] p-4 sm:p-10 sm:pt-1 md:p-0 pb-0 sm:pb-0 justify-start'>
+            <div className='flex flex-col gap-4 w-full p-4 sm:p-10 sm:pt-1 md:p-0 pb-0 sm:pb-0 justify-start'>
               {shortFacts.map((fact, index) => (
-                <div className='flex text-sm justify-between text-center items-center' key={index}>
-                  <h3 className='opacity-90'>{fact.name}</h3>
-                  <h3 className='w-1/2 text-left'>{fact.value}</h3>
+                <div className='flex text-sm justify-between text-start items-center' key={index}>
+                  <h3 className='w-1/2 opacity-90'>{fact.name}</h3>
+                  <h3 className='w-1/2 text-end'>{fact.value}</h3>
                 </div>
               ))}
               {Ratings?.map((Rating, index) => (
-                <div className='flex text-sm justify-between text-center items-center' key={index}>
-                  <h3 className='opacity-90'>
+                <div className='flex text-sm justify-between text-start items-center' key={index}>
+                  <h3 className='opacity-90 w-1/2'>
                     {Rating.Source === 'Internet Movie Database' ? 'IMDb Rating' : Rating.Source}
                   </h3>
-                  <h3 className='w-1/2 text-left'>{Rating.Value}</h3>
+                  <h3 className='w-1/2 text-end'>{Rating.Value}</h3>
                 </div>
               ))}
-              <div className='flex text-sm justify-start items-center'>
+              <div className='flex text-sm justify-between items-center'>
                 <h3 className='opacity-90 w-1/2'>More details</h3>
                 <motion.a
                   href={`https://www.imdb.com/title/${imdbID}`}

@@ -22,7 +22,6 @@ export default function Movies({ searchQuery, page }: MoviesProps) {
   const dispatch = useDispatch<AppDispatch>()
   const movies = useSelector(fetchedMovies)
   const isLoading = useSelector(moviesAreLoading)
-  console.log(movies)
 
   useEffect(() => {
     const searchData = {
@@ -38,12 +37,13 @@ export default function Movies({ searchQuery, page }: MoviesProps) {
     const title = capitalizeFirstLetters(searchQuery)
     document.title = `AV | ${title}`
   }, [dispatch, searchQuery, page])
-  console.log(page)
 
   if (Number(page) > 100 || !movies) {
-    let message: string =
-      Number(page) > 100 ? `Page doesn't exist` : `Movies with title «${searchQuery}» not found`
-    return <ErrorMessage message={message} />
+    if (!isLoading) {
+      let message: string =
+        Number(page) > 100 ? `Page doesn't exist` : `Movies with title «${searchQuery}» not found`
+      return <ErrorMessage message={message} />
+    }
   } else {
     return (
       <>

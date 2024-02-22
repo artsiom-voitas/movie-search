@@ -1,7 +1,9 @@
+import { ErrorMessage } from '@/components'
 import { MovieResponse } from '@/redux/sliceTypes'
 import { createLongFacts, createShortFacts } from '@/services/createDataToRender'
 import { Card, CardBody, CardFooter, Image, Skeleton } from '@nextui-org/react'
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 
 import { Imdb } from './icons'
 
@@ -11,13 +13,14 @@ export interface MovieProps {
 }
 
 export default function MovieInformation({ movie, isLoading }: MovieProps) {
-  let { Title, Poster, Ratings, imdbID } = movie
+  let { Title, Poster, Ratings, imdbID, Response, Error } = movie
 
   Poster = Poster === 'N/A' ? '/placeholder.png' : Poster
-  const shortFacts = createShortFacts(movie)
-  const longFacts = createLongFacts(movie)
 
-  if (isLoading) {
+  if (isLoading || Response === 'False') {
+    if (Response === 'False') {
+      return <ErrorMessage message={Error} />
+    }
     const shortFacts = createShortFacts()
     const longFacts = createLongFacts()
     return (
@@ -53,6 +56,8 @@ export default function MovieInformation({ movie, isLoading }: MovieProps) {
       </Card>
     )
   } else {
+    const shortFacts = createShortFacts(movie)
+    const longFacts = createLongFacts(movie)
     return (
       <Card>
         <CardBody className='flex-col md:flex-row items-center flex p-5 lg:gap-20 gap-10 lg:p-14 lg:pb-5'>

@@ -52,6 +52,7 @@ export interface MovieResponse {
   Production: string
   Website: string
   Response?: string
+  Error?: string
 }
 
 export interface MovieInitialState {

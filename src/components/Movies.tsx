@@ -1,6 +1,6 @@
 'use client'
 
-import { CustomPagination, MovieCard } from '@/components'
+import { CustomPagination, ErrorMessage, MovieCard } from '@/components'
 import {
   fetchMovies,
   fetchedMovies,
@@ -10,7 +10,6 @@ import {
 } from '@/redux/moviesSlice'
 import { AppDispatch } from '@/redux/store'
 import capitalizeFirstLetters from '@/services/capitalizeFirstLetters'
-import { redirect, usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -23,10 +22,7 @@ export default function Movies({ searchQuery, page }: MoviesProps) {
   const dispatch = useDispatch<AppDispatch>()
   const movies = useSelector(fetchedMovies)
   const isLoading = useSelector(moviesAreLoading)
-
-  if (searchQuery === null || searchQuery.length === 0 || page === null || page.length === 0) {
-    redirect('/error')
-  }
+  console.log(movies)
 
   useEffect(() => {
     const searchData = {
@@ -42,12 +38,16 @@ export default function Movies({ searchQuery, page }: MoviesProps) {
     const title = capitalizeFirstLetters(searchQuery)
     document.title = `AV | ${title}`
   }, [dispatch, searchQuery, page])
+  console.log(page)
 
-  return (
-    <>
-      {movies &&
-        movies.length > 0 &&
-        movies.map((movie) => (
+  if (Number(page) > 100 || !movies) {
+    let message: string =
+      Number(page) > 100 ? `Page doesn't exist` : `Movies with title «${searchQuery}» not found`
+    return <ErrorMessage message={message} />
+  } else {
+    return (
+      <>
+        {movies.map((movie) => (
           <MovieCard
             isLoading={isLoading}
             key={movie?.imdbID}
@@ -57,7 +57,8 @@ export default function Movies({ searchQuery, page }: MoviesProps) {
             imdbID={movie.imdbID}
           />
         ))}
-      {!isLoading && <CustomPagination pathname='movies' query={searchQuery} />}
-    </>
-  )
+        <CustomPagination isLoading={isLoading} pathname='movies' query={searchQuery} />
+      </>
+    )
+  }
 }

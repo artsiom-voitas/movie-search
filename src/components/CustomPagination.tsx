@@ -1,22 +1,18 @@
 'use client'
 
-import {
-  currentMoviesPage,
-  moviesAreLoading,
-  setCurrentPage,
-  totalMoviesAmount,
-} from '@/redux/moviesSlice'
+import { currentMoviesPage, setCurrentPage, totalMoviesAmount } from '@/redux/moviesSlice'
 import { AppDispatch } from '@/redux/store'
 import { Pagination } from '@nextui-org/react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
 
 interface CustomPaginationProps {
   pathname: string
   query: string
+  isLoading: boolean
 }
 
-export default function CustomPagination({ pathname, query }: CustomPaginationProps) {
+export default function CustomPagination({ pathname, query, isLoading }: CustomPaginationProps) {
   const dispatch = useDispatch<AppDispatch>()
   const router = useRouter()
   const totalAmount = Number(useSelector(totalMoviesAmount))
@@ -36,19 +32,17 @@ export default function CustomPagination({ pathname, query }: CustomPaginationPr
     router.push(newUrl)
   }
 
-  return (
-    <>
-      {totalAmount <= 10 ? (
-        <></>
-      ) : (
-        <Pagination
-          total={pagesCount}
-          page={currentPage}
-          showControls
-          onChange={handleChange}
-          className='flex w-full items-center justify-center'
-        />
-      )}
-    </>
-  )
+  if (isLoading || totalAmount <= 10 || Number.isNaN(totalAmount)) {
+    return null
+  } else {
+    return (
+      <Pagination
+        total={pagesCount}
+        page={currentPage}
+        showControls
+        onChange={handleChange}
+        className='flex w-full items-center justify-center'
+      />
+    )
+  }
 }
